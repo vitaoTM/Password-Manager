@@ -22,9 +22,9 @@
     <%= form.text_field :password %>
   </div>
 
-  <div>
-    <%= form.submit %>
-    <%= button_tag "Delete", form: "delete_password" %>
+  <div class="py-2">
+    <%= form.submit "Update Password", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" %>
+    <%= button_tag "Delete", form: "delete_password", class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-5 rounded" %>
   </div>
 <% end %>
 
