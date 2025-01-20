@@ -1,5 +1,12 @@
-<h1>Password manager</h1>
+<div class="flex justify-between item-center">
+  <h1 class="mb-0">Password manager</h1>
+  <%= link_to "New Password", new_password_path %>
+</div>
 
-<%= link_to "New Password", new_password_path %>
-
-<%#= render @password %>
+<div class="flex flex-col divide-y divide-gray-100">
+  <%= render @passwords %>
+  <%# @passwords.each do |pass| %>
+    <%#= pass.username %> : <%#= pass.url %>
+    <br>
+  <%# end %>
+</div>
