@@ -1,11 +1,17 @@
+
+<%# <span class="material-symbols-outlined">arrow_back</span> %>
+<%= link_to "← Back", root_path, class: "block mb-4 no-underline text-blue-500" %>
+
 <div class="mb-4 flex justify-between items-center">
   <h1 class="mb-0">
-    <%= @password.url %>
-    <%= link_to @password.url, target: :_blank do %>
+    <%#= @password.url %>
+    <%= link_to @password.url, target: :_blank, class: "no-underline text-blue-500" do %>
+      <%= @password.url %>
       <span class="material-symbols-outlined text-blue-500">open_in_new</span>
     <% end %>
   </h1>
 </div>
+<h3>Credentials</h3>
 
 <h6>Username / Email </h6>
 <div class="flex gap-1">
@@ -22,3 +28,18 @@
 <div class="my-2 flex gap-1">
   <%= link_to "Edit", edit_password_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"  %>
 </div>
+
+<div class="mb-4 mt-8 flex justify-between items-center">
+  <h3 class="my-0">Shared With</h3>
+  <%= link_to "Add a user", new_password_share_path(@password) %>
+</div>
+
+<div class="flex flex-col gap-2 divide-y divide-gray-100">
+  <% @password.users.excluding(current_user).each do |user| %>
+    <div class="flex justify-between items-center">
+      <div> <%= user.email %> </div>
+      <%= button_to "Remove", password_share_path(@password, user), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+    </div>
+  <% end %>
+</div>
+

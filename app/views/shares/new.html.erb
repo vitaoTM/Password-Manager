@@ -1,0 +1,14 @@
+<%= link_to "← Back", root_path, class: "block mb-4 no-underline text-blue-500" %>
+
+<h1>Share Password</h1>
+
+<%= form_with model: @user_password, url: password_shares_path(@password) do |form| %>
+  <div class="relative flex flex-col justify-center overflow-hidden bg-gray-50 py-2">
+    <%= form.label :user_id %>
+    <%= form.collection_select :user_id, @user, :id, :email %>
+  </div>
+
+  <div class="bg-blue-500 hover:bg-blue-700 text-white font-bold mg-2 space-x-2 py-2 px-4 rounded">
+    <%= form.submit "Share" %>
+  </div>
+<% end %>
