@@ -8,6 +8,11 @@
     <%= form.collection_select :user_id, @user, :id, :email %>
   </div>
 
+  <div class="relative flex flex-col justify-center overflow-hidden bg-gray-50 py-2">
+    <%= form.label :role %>
+    <%= form.select :role, UserPassword::ROLES.map { |r| [r.titleize, r] } %>
+  </div>
+
   <div class="bg-blue-500 hover:bg-blue-700 text-white font-bold mg-2 space-x-2 py-2 px-4 rounded">
     <%= form.submit "Share" %>
   </div>
