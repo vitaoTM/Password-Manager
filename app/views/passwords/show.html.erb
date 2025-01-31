@@ -1,6 +1,6 @@
 
 <%# <span class="material-symbols-outlined">arrow_back</span> %>
-<%= link_to "← Back", root_path, class: "block mb-4 no-underline text-blue-500" %>
+<%= link_to "← Back", :back, class: "block mb-4 no-underline text-blue-500" %>
 
 <div class="mb-4 flex justify-between items-center">
   <h1 class="mb-0">
@@ -11,40 +11,60 @@
     <% end %>
   </h1>
 </div>
-<h3>Credentials</h3>
 
-<h6>Username / Email </h6>
-<div class="flex gap-1">
-  <pre class="my-0 flex-grow"><code><%= @password.username %></code></pre>
-  <%= button_tag "Copy", class: "px-2 py-2.5 bg-gray-200 rounded", data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: @password.username } %>
-</div>
+  <h3>Credentials</h3>
 
-<h6>Password</h6>
-<div class="flex gap-1">
-  <pre class="my-0 flex-grow"><code><%= @password.password %></code></pre>
-  <%= button_tag "Copy", class: "px-2 py-2.5 bg-gray-200 rounded", data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: @password.password }
-  %>
-</div>
-<div class="my-2 flex gap-1">
-  <%= link_to "Edit", edit_password_path(@password) if current_user_password.editable? %> <!--  class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"  %> -->
-</div>
-
-<%# Share %>
-
-<div class="mb-4 mt-8 flex justify-between items-center">
-  <h3 class="my-0">Shared With</h3>
-  <%= link_to "Add a user", new_password_share_path(@password) if current_user_password.shareable? %>
-</div>
-
-<div class="flex flex-col gap-2 divide-y divide-gray-100">
-  <% @password.user_passwords.includes(:user).each do |user_password| %>
-    <div class="grid grid-cols-3">
-      <div> <%= user_password.user.email %> </div>
-      <div class="text-right"> <%= user_password.role.titleize %> </div>
-      <div class="text-right">
-        <%= button_to "Remove", password_share_path(@password, user_password.user), method: :delete, data: { turbo_confirm: "Are you sure?" } if current_user_password.shareable? %>
-      </div>
+<div class="w-full max-w-screen-lg mx-auto">
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <h6>Username / Email </h6>
+    <div class="flex gap-1">
+      <pre class="my-0 flex-grow"><code><%= @password.username %></code></pre>
+      <%= button_tag "Copy", class: "px-2 py-2.5 bg-gray-200 rounded", data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: @password.username } %>
     </div>
-  <% end %>
+
+    <h6>Password</h6>
+    <div class="flex gap-1">
+      <pre class="my-0 flex-grow"><code><%= @password.password %></code></pre>
+      <%= button_tag "Copy", class: "px-2 py-2.5 bg-gray-200 rounded", data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: @password.password }
+      %>
+    </div>
+    <div class="my-4 mt-8 grid-2 gap-1 text-right">
+      <% if current_user_password.editable? %>
+        <%= link_to "Edit", edit_password_path(@password), class: "btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="w-full max-w-screen-lg mx-auto">
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+<%# Share %>
+    <div class="mb-4 mt-8 flex justify-between items-center">
+      <h3 class="my-0">Shared With</h3>
+      <% if current_user_password.shareable? %>
+        <%= link_to "Share with friend", new_password_share_path(@password) %>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col gap-2 divide-y divide-gray-100">
+      <% @password.user_passwords.includes(:user).each do |user_password| %>
+        <div class="grid grid-cols-3">
+          <div> <%= user_password.user.email %> </div>
+          <div class="text-right"> <%= user_password.role.titleize %> </div>
+          <div class="text-right">
+            <% if !user_password.deletable? %>
+              <%= button_to "Remove",
+                password_share_path(@password, user_password.user),
+                method: :delete, data: { turbo_confirm: "Are you sure?" },
+                # if current_user_password.shareable?
+                class: "text-red-500 hover:text-red-700"
+              %>
+            <% end %>
+
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 

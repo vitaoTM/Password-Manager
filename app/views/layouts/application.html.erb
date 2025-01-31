@@ -12,9 +12,9 @@
   </head>
 
   <body>
+    <%= render "shared/flash" %>
     <main class="container mx-auto">
-      <div class="prose maxw-none px-5">
-        <%= render "shared/flash" %>
+      <div class="prose max-w-none px-5">
         <%= render "shared/nav" %>
         <%= yield %>
       </div>
