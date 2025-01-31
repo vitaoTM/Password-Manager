@@ -8,7 +8,7 @@
   <% end %>
 
   <div class="max-w-sm mx-auto">
-      <div class="mb-4">
+    <div class="mb-4">
       <div class="field">
         <%= form.label :url, class: "f-label"%>
         <%= form.url_field :url, class: "f-f" %>
@@ -32,10 +32,17 @@
         <% end %>
 
           <% if form.object.persisted? && current_user_password.deletable? %>
-            <%= button_tag "Delete", form: "delete_password", class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-5 rounded" %>
+            <%= button_tag "Delete",
+              form: "delete_password",
+              class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-5 rounded"
+            %>
           <% end %>
       </div>
+    </div>
   </div>
 <% end %>
-
-<%= form_with model: password, method: :delete, id: "delete_password", data: { turbo_confirm: "Are you sure??"} %>
+<%= form_with model: password,
+  method: :delete,
+  id: "delete_password",
+  data: { turbo_confirm: "Are you sure??" }
+%>

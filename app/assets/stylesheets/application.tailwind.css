@@ -52,6 +52,6 @@
 
 
   #error-explanation {
-    @apply p-4 rounded bg-gray-300 text-gray-800;
+    @apply p-4 rounded bg-yellow-200 list-none;
   }
 }
