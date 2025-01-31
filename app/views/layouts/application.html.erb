@@ -12,10 +12,10 @@
   </head>
 
   <body>
+    <%= render "shared/flash" %>
     <main class="container mx-auto">
-      <div class="prose mx-auto mt-28">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+      <div class="prose max-w-none px-5">
+        <%= render "shared/nav" %>
         <%= yield %>
       </div>
     </main>

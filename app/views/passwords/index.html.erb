@@ -1,16 +1,8 @@
 <div class="flex justify-between item-center">
-  <h1 class="mb-0">Password manager</h1>
+  <h1 class="mb-0">All Passwords</h1>
   <%= link_to "New Password", new_password_path %>
 </div>
 
 <div class="flex flex-col divide-y divide-gray-100">
   <%= render @passwords %>
-  <%# @passwords.each do |pass| %>
-    <%#= pass.username %> : <%#= pass.url %>
-    <br>
-  <%# end %>
 </div>
-
-<% if user_signed_in? %>
-  <%= button_to "Log out", destroy_user_session_path, method: :delete %>
-<% end %>

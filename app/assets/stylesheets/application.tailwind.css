@@ -1,13 +1,57 @@
 @tailwind base;
 @tailwind components;
+
 @tailwind utilities;
 
-/*
+.f-f {
+  @apply bg-gray-900 rounded w-full py-3 px-3 leading-tight outline-none text-white;
+}
+
+.btn-danger {
+  @apply bg-red-500 text-white font-bold py-2 px-5 rounded;
+}
+
+.btn-danger:hover {
+  @apply bg-red-700;
+}
+
 
 @layer components {
   .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+    @apply bg-blue-500 text-white font-bold py-2 px-5 rounded;
+  }
+
+  .btn-primary:hover {
+    @apply bg-blue-700;
+  }
+
+  label {
+    @apply block font-medium;
+  }
+
+  imput {
+    @apply block;
+  }
+
+  .actions {
+    @apply bg-blue-500 rounded text-white text-center px-4 py-2;
+  }
+
+  .field {
+    @apply mb-4;
+  }
+
+  .f-label {
+    @apply block mb-2 text-sm font-medium text-gray-900
+    /* block text-gray-700 text-sm font-bold mb-2 */
+  }
+
+  .f-label:dark {
+    @apply text-white
+  }
+
+
+  #error-explanation {
+    @apply p-4 rounded bg-gray-300 text-gray-800;
   }
 }
-
-*/

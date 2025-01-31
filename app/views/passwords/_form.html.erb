@@ -7,24 +7,34 @@
     <% end %>
   <% end %>
 
-  <div>
-    <%= form.label :url %>
-    <%= form.url_field :url %>
-  </div>
+  <div class="max-w-sm mx-auto">
+      <div class="mb-4">
+      <div class="field">
+        <%= form.label :url, class: "f-label"%>
+        <%= form.url_field :url, class: "f-f" %>
+      </div>
 
-  <div>
-    <%= form.label :username %>
-    <%= form.text_field :username %>
-  </div>
+      <div class="field">
+        <%= form.label :username, class: "f-label" %>
+        <%= form.text_field :username, class: "f-f" %>
+      </div>
 
-  <div>
-    <%= form.label :password %>
-    <%= form.text_field :password %>
-  </div>
+      <div class="field">
+        <%= form.label :password, class: "f-label" %>
+        <%= form.text_field :password, class: "f-f" %>
+      </div>
 
-  <div class="py-2">
-    <%= form.submit "Update Password", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" %>
-    <%= button_tag "Delete", form: "delete_password", class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-5 rounded" %>
+      <div class="field py-2">
+        <% if form.object.persisted? %>
+          <%= form.submit "Update Password", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" %>
+        <% else %>
+          <%= form.submit "New", class: "btn-primary" %>
+        <% end %>
+
+          <% if form.object.persisted? && current_user_password.deletable? %>
+            <%= button_tag "Delete", form: "delete_password", class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-5 rounded" %>
+          <% end %>
+      </div>
   </div>
 <% end %>
 

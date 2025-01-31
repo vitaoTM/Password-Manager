@@ -1,0 +1,22 @@
+
+<nav class="flex justify-between">
+  <div class="flex items-center gap-2">
+    <ul class="list-none flex gap-4">
+      <li><%= link_to 'Home', root_path, class: "text-xl font-bold no-underline" %></li>
+    </ul>
+    <ul class="list-none flex">
+      <li> <%= link_to 'Password Mananger', root_path %> </li>
+    </ul>
+  </div>
+
+  <ul class="list-none flex items-center gap-4">
+    <% if user_signed_in? %>
+      <li><%= link_to "Profile", edit_user_registration_path %></li>
+      <li><%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn-primary" %></li>
+    <% else %>
+      <li><%= link_to "Sign in", new_user_session_path %></li>
+      <li><%= link_to "Sign uo", new_user_registration_path %></li>
+    <% end %>
+
+  </ul>
+</nav>

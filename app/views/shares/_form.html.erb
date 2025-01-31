@@ -1,0 +1,17 @@
+<div class="w-full max-w-screen-lg mx-auto">
+  <%= form_with model: user_password, url: password_shares_path(password) do |form| %>
+    <div class="relative flex flex-col justify-center overflow-hidden bg-gray-50 py-2">
+      <%= form.label :user_id, class: "f-label" %>
+      <%= form.collection_select :user_id, password.shareable_users, :id, :email %>
+    </div>
+
+    <div class="relative flex flex-col justify-center overflow-hidden bg-gray-50 py-2">
+      <%= form.label :role, class: "f-label" %>
+      <%= form.select :role, UserPassword::ROLES.map { |r| [r.titleize, r] } %>
+    </div>
+
+    <div>
+      <%= form.submit "Share", class:"btn-primary" %>
+    </div>
+  <% end %>
+</div>
