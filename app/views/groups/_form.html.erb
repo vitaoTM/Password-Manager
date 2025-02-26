@@ -1,0 +1,12 @@
+<%= form_with model: group do |form| %>
+  <div class="max-w-sm mx-auto">
+    <div class="field">
+      <%= form.label 'name', class: 'f-field' %>
+      <%= form.text_field :name, autofocus: true, class: "f-f" %>
+    </div>
+
+    <div class="field py-2">
+      <%= form.submit "New Group", class: "btn-primary" %>
+    </div>
+  </div>
+<% end %>

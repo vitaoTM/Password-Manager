@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :shares, only: [:new, :create, :destroy]
   end
 
+  resources :groups
   # Defines the root path route ("/")
   root "passwords#index"
 end
