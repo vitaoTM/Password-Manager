@@ -1,0 +1,10 @@
+<%= tag.div id: dom_id(group) do %>
+  <%= link_to group,
+    id: dom_id(group),
+    class: "p-4 block no-underline rounded hover:bg-gray-100" do
+  %>
+    <div class="text-sm text-gray-700 font-medium">
+      <%= current_user.group.name %>
+    </div>
+  <% end %>
+<% end %>
