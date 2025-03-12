@@ -1,1 +1,22 @@
-<h1>Group Show</h1>
+<div class="flex justify-between">
+
+  <h1>Group Show</h1>
+
+  <div class="px-2 py-2">
+    <%= link_to "Edit", edit_group_path, class: "btn-primary  no-underline basis-64" %>
+  </div>
+</div>
+
+<%= tag.div current_user.group.name, class: "text-lg text-green-600" %>
+
+<% current_user.group.users.each do |e| %>
+  <%= tag.p e.email %>
+<% end %>
+
+<%= tag.div button_to "delete",
+  group_path,
+  method: :destroy,
+  data: { turbo_confirm: "are u sure?" },
+  class: "btn-danger"
+%>
+
