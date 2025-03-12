@@ -3,10 +3,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  # has_and_belongs_to_many :groups
-  belongs_to :group, optional: true
 
-  # has_many :groups, optional: true
+  # testing adding other models for join tables
+
+  has_many :groups, through: :memberships
+  has_many :memberships, dependent: :nullify #, ensure_owner_was: current_user
   has_many :user_passwords, dependent: :destroy
   has_many :passwords, through: :user_passwords
 end
