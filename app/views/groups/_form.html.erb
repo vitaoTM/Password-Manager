@@ -1,12 +1,23 @@
 <%= form_with model: group do |form| %>
+   <%# if form.object.errors.any? %>
+    <%# form.object.errors.full_messages.each do |message| %>
+      <div>
+        <%# = message %>
+      </div>
+    <%# end %>
+  <%# end %>
   <div class="max-w-sm mx-auto">
     <div class="field">
-      <%= form.label 'name', class: 'f-field' %>
+      <%= form.label "Group Name", class: 'f-field' %>
       <%= form.text_field :name, autofocus: true, class: "f-f" %>
     </div>
 
     <div class="field py-2">
-      <%= form.submit "New Group", class: "btn-primary" %>
+      <% if form.object.persisted? %>
+        <%= form.submit "Update Group", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" %>
+      <% else %>
+        <%= form.submit "New Group", class: "btn-primary" %>
+      <% end %>
     </div>
   </div>
 <% end %>
