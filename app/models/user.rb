@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   # testing adding other models for join tables
 
-  has_many :groups, through: :memberships
+  # has_many :groups, through: :memberships
   has_many :memberships, dependent: :nullify #, ensure_owner_was: current_user
   has_many :user_passwords, dependent: :destroy
   has_many :passwords, through: :user_passwords
