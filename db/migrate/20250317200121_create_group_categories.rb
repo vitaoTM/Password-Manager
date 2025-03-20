@@ -1,10 +1,10 @@
 class CreateGroupCategories < ActiveRecord::Migration[7.0]
   def change
     create_table :group_categories do |t|
-      t.belongs_to :user, null: false, foreign_key: true
-      t.belongs_to :group, null: false, foreign_key: true
+      t.integer :user_id
+      t.integer :group_id
 
-      t.timestamps
+      # t.timestamps
     end
   end
 end
