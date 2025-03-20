@@ -1,10 +1,9 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_group, except: [:index, :new, :create]
 
   def index
-    @groups = Group.all
-    @user = current_user
-
+    @groups = current_user.groups.all
   end
 
   def show
@@ -16,14 +15,9 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-
-    if current_user.group
-      # will allow more than 1 group per user???
-    end
+    @group.users << current_user
 
     if @group.save
-      current_user.group = @group
-      current_user.save
       redirect_to groups_path
     else
       render :new, status: :unprocessable_entity
@@ -36,7 +30,7 @@ class GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to @groups
+      redirect_to groups_path
     else
       render :edit, status: :unprocessable_entity
     end
@@ -49,6 +43,10 @@ class GroupsController < ApplicationController
   end
 
   private
+
+  def set_group
+    @group = Group.find(params[:id])
+  end
 
   def group_params
     params.require(:group).permit(:name)
